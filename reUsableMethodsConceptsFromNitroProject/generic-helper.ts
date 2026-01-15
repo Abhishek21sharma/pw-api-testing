@@ -11,3 +11,8 @@ export function capitalizeFirstLetter(input: string, delimeter: string) {
     .map((s) => (s ? s[0].toUpperCase() + s.slice(1) : s))
     .join(delimeter);
 }
+
+export function getToken(response: any) {
+  //IMPORTANT LOGIC HERE
+  return response.body.access_token || "";
+}
