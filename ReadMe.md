@@ -1,3 +1,13 @@
+very important website with cool playwright tips and tricks.
+once you're ready with playwright - go through this: https://playwrightsolutions.com/
+
+also check this out:
+https://playwrightsolutions.com/is-it-possible-to-do-api-testing-with-playwright-the-definitive/
+
+for schema validation , we have converted our reponse to schema using: https://transform.tools/json-to-json-schema
+also download node pkg: ajv.js x`
+schema generator lib: npm i genson-js
+
 difference between , node, npm, npx..
 why we have npm install --save-dev @faker-js/faker (--save-dev)..
 also when others will run this using npx and this faker lib is part of package.json, it will
