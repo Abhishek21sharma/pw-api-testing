@@ -149,3 +149,30 @@ dev: "https://dev.example.com",
 staging: "https://staging.example.com",
 prod: "https://example.com"
 };
+
+difference between || and ??
+both are used for 'fallback' values , when one of the expression value is falsy/null/undefined
+
+so , || -> this operator returns the right hand value, if the left hand side is falsy
+what is falsy in TS/JS ?
+null or undefined
+false
+0
+""
+NaN
+The risk with || --> even in some case our test returns 0 or blank string "", this will be considered as false so this expression will return right hand side. but this is something we may not want. Like in case of css.innerText() returns a empty string OR a retry count in playwright.config.ts count is 0 but it doesn't make them false.
+
+?? --> introduced in 2020, is more strict type, is only returns the right hand side if the left hand side is nullish. which is Null or undefined.
+it trets false, 0 and "" as valid values..
+
+example:
+// Scenario: Getting a timeout value from a config file
+const customTimeout: number | undefined = config.timeout;
+
+// Using || (Dangerous)
+// If customTimeout is 0, this results in 30000
+const finalTimeoutOR = customTimeout || 30000;
+
+// Using ?? (Safe/Best Practice)
+// If customTimeout is 0, this results in 0
+const finalTimeoutNullish = customTimeout ?? 30000;
