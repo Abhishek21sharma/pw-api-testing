@@ -176,3 +176,15 @@ const finalTimeoutOR = customTimeout || 30000;
 // Using ?? (Safe/Best Practice)
 // If customTimeout is 0, this results in 0
 const finalTimeoutNullish = customTimeout ?? 30000;
+
+IMPORTANT --> look at files --> data-generator.ts and smoketests2.spec.ts for details
+one of the biggest problem JS or TS solved is searlized and de-searlized the data (JSON)
+that's why JSON is JS object notation..
+here with JS/TS ,
+a. we can directly update the JSON node value
+b. we don't have to explictly loop through the json structure to get that json key we want to update
+c. we don't have to save to the payload file the updated node(jsonkeys)
+d. object will be updated autoamtically, and ready to send over
+e. json.Stringify() and json.parse() and more precisely structuredClone() methods are best
+f. can also directly read the value from DOT notation
+g. main is updating using DOT notation and that's it whole JSON object (payload is updated)
