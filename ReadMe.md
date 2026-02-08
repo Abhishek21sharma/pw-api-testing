@@ -91,3 +91,61 @@ key2 ='value'
 ..if we want to update the value from ENV VARIABLE and in that case
 TS doesn't know what value it will recieve, string , array etc..
 it wants us to tell in advance..
+
+pipe operator in TS:
+(it's called UNION operator)
+. logical OR
+assigned the left side if it's not falsy
+otherwise (false - null - undefined) , assign the value right
+// If 'secret' is missing/null, use 'value'
+const secret: string = response.body.data.secret || response.body.data.value;
+
+same way, another example:
+// If the environment variable isn't set, default to 'chromium'
+const browser = process.env.BROWSER || 'chromium';
+
+//in IF block -> same as java (logical OR )
+if (status === 'passed' || status === 'skipped') {
+console.log('Test did not fail');
+}
+
+single Type -> | -> union type
+for flexible data types::
+it defiens a variable to hold value of more than 1 type
+let test Id: string | number | boolean;
+test ID = "TC-101"
+test ID = 101
+test ID = true
+
+String Literal Unions it's a 'ENUM' REPLACEMENT --> and custom type
+
+type TestStatus = 'passed' | 'failed' | 'flaky' | 'timedOut';
+
+now TestStatus can be anothing from above list and nothing else..
+
+What is : Record<K,V> : It's a utility type which is used to define the structure of the object
+where we know the 'types of the key and value'
+// The Type definition
+const userRoles: Record<string, string> = {
+admin: "All Access",
+tester: "Execution Only",
+guest: "Read Only"
+};
+
+//before record ,we used to use 'index signatures' :
+
+// Index Signature (Older style)
+type UserTypeA = { [key: string]: number };
+
+// Record (Modern, cleaner style)
+type UserTypeB = Record<string, number>;
+
+//best use case:
+type Environment = 'dev' | 'staging' | 'prod';
+
+// TS will throw an error if you forget one of the environments below
+const urls: Record<Environment, string> = {
+dev: "https://dev.example.com",
+staging: "https://staging.example.com",
+prod: "https://example.com"
+};
