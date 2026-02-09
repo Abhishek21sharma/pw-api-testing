@@ -188,3 +188,7 @@ d. object will be updated autoamtically, and ready to send over
 e. json.Stringify() and json.parse() and more precisely structuredClone() methods are best
 f. can also directly read the value from DOT notation
 g. main is updating using DOT notation and that's it whole JSON object (payload is updated)
+
+very important , sometime a .JSON file we are importing thorws some error msgs,
+best in that case is to be 'import' it and provide a type in the end 'with' syntax:
+import person from '../path_to_json_file' with {type: 'json'}
