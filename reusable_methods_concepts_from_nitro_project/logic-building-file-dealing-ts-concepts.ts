@@ -1,8 +1,8 @@
 //import person from '../test-data/admin-event-result-entity-view-002-person.json' with {type: 'json'};
 //import eventV3 from '../test-data/admin-event-result-entity-view-002-event-v3-iabs-facial-refdt-encounter.json' with {type: 'json'}
 
-import { readdir, readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { readdir, readFile } from "fs/promises";
+import { join } from "path";
 
 const dir = "/Users/2105775/Tools/Automation/pw-test/test-data";
 

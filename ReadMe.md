@@ -192,3 +192,10 @@ g. main is updating using DOT notation and that's it whole JSON object (payload 
 very important , sometime a .JSON file we are importing thorws some error msgs,
 best in that case is to be 'import' it and provide a type in the end 'with' syntax:
 import person from '../path_to_json_file' with {type: 'json'}
+
+//in order to use inbuilt node modules like fs (to read and write files)
+we need to add tsconfigfile and tell them use node modules there
+(check the tsconfig file)
+
+also best practices: in many many cases (to use top level await , to use modern TS/JS features)
+use 'type: 'module' in your package.json file...
