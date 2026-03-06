@@ -267,3 +267,11 @@ body: JSON.stringify(mockProduct),
 await page.goto('/products/101');
 await expect(page.locator('.product-name')).toHaveText(mockProduct.name);
 });
+
+in some cases we also use 'as' keyword. it's defined in TS project so check that
+const root = document.queryselector(sel) as HTMLElement | null
+
+//another good coding example:
+const seriesnames = (options.series || []).map( (s: any) => s.name)
+
+const xAxis = option.xAxis?.[0]?.data
