@@ -1,4 +1,4 @@
-import articleRequestPayload from "../requests-objects/POST-article.json";
+import articleRequestPayload from "../requests-objects/POST-article.json" with { type: "json" }; //this is static import
 import { faker } from "@faker-js/faker";
 
 //look if it's a function.. how can we export it..

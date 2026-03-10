@@ -275,3 +275,123 @@ const root = document.queryselector(sel) as HTMLElement | null
 const seriesnames = (options.series || []).map( (s: any) => s.name)
 
 const xAxis = option.xAxis?.[0]?.data
+
+? -> means optional..
+making property optional using Partial<T>
+interface User{
+id: number;
+name: string;
+email: string; // ? means this property is optional..
+}
+
+type UpdateUser = Partial<User>
+
+what does this means is:
+{
+id?: number;
+name?: string;
+email?: string
+}
+
+//this is best for payloads, test data builder etc
+
+//another use case ..
+test data builder like pattern.. we have used similar approch in this project
+
+structure of data
+export interface TestUser {
+username: string;
+password: string;
+role?: 'admin' | 'user';
+token?: string | null;
+}
+
+defining data:
+export class TestUserBuilder {
+private user: TestUser = {
+username: 'defaultUser',
+password: 'Password123'
+};
+
+withUsername(username: string): this {
+this.user.username = username;
+return this;
+}
+
+withPassword(password: string): this {
+this.user.password = password;
+return this;
+}
+
+withRole(role: 'admin' | 'user'): this {
+this.user.role = role;
+return this;
+}
+
+withToken(token: string | null): this {
+this.user.token = token;
+return this;
+}
+
+build(): TestUser {
+return { ...this.user };
+}
+}
+//note we have used : ...this.user
+constructing the object: this means build the object {} and used all keys to build it (whatever is necessary..)
+(THIS IS VERY IMPORTANT. THE SPREAD OPERATOR...)
+
+useage.
+test('admin user can access dashboard', async ({ page }) => {
+const adminUser = new TestUserBuilder()
+.withUsername('admin1')
+.withRole('admin')
+.build();
+
+await login(page, adminUser);
+});
+
+//DTOs vs Domain Model
+Domain Model: The business logic (implementing APIs logic)
+DTO : Data Transfer Object : mathes API structure
+
+example:
+export interface UserDTO {
+first_name: string; // Note the snake_case (common in APIs)
+last_name: string;
+user_status: number;
+created_at: string; // Raw ISO string from DB
+}
+
+export class User {
+//this will create a private dto: UserDTO in User class..
+constructor(private dto: UserDTO) {}
+
+// Logic lives here, not in the DTO
+get fullName(): string {
+return `${this.dto.first_name} ${this.dto.last_name}`;
+}
+
+get isActive(): boolean {
+return this.dto.user_status === 1;
+}
+
+// Formatting the date for a UI assertion in Playwright
+get joinedDate(): string {
+return new Date(this.dto.created_at).toLocaleDateString();
+}
+}
+
+//useage::
+export class UserMapper {
+static toDomain(dto: UserDTO): User {
+return new User(dto);
+}
+}
+
+// In your Playwright Test:
+const response = await apiContext.get('/user/1');
+const dto: UserDTO = await response.json();
+const user = UserMapper.toDomain(dto);
+
+await expect(page.locator('.profile-name')).toHaveText(user.fullName);
