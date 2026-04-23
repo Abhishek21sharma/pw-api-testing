@@ -2,7 +2,7 @@ import { test, expect, request } from "@playwright/test";
 
 test("get test tags", async ({ request }) => {
   const res = await request.get(
-    "https://conduit-api.bondaracademy.com/api/tags"
+    "https://conduit-api.bondaracademy.com/api/tags",
   );
 
   const tagRes = await res.json();
@@ -23,7 +23,7 @@ test("post request", async ({ request }) => {
     "https://conduit-api.bondaracademy.com/api/users/login",
     {
       data: { user: { email: "Abhi21sharma@test.com", password: "abhi@test" } },
-    }
+    },
   );
 
   const tokenResJSON = await tokenRes.json();

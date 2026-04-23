@@ -1,5 +1,5 @@
 import { expect as baseExpect } from "@playwright/test";
-import { APILogger } from "./logger";
+import { APILogger } from "./logger.js";
 //this is to add more custome messages and errors in expects..
 
 let apiLogger: APILogger;
