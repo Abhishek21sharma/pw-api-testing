@@ -307,3 +307,108 @@ const newUser = new UserBuilder().withAdminRole().build();
     // ...
 
 });
+
+Promises<> in TS:
+A Promise is an object representing the eventual completion (or failure) of an asynchronous operation and its resulting value.
+It exists in one of three states:
+Pending: Initial state, neither fulfilled nor rejected.
+Fulfilled (Resolved): The operation completed successfully.
+Rejected: The operation failed (e.g., a timeout or a 404 error).
+// Explicitly defining a Promise that returns a string
+const myCustomWait = (timeout: number): Promise<string> => {
+return new Promise((resolve, reject) => {
+// The Promise starts in the PENDING state here
+
+    if (timeout < 0) {
+      // Transition to REJECTED state
+      reject(new Error("Timeout cannot be negative"));
+    }
+
+    setTimeout(() => {
+      // Transition to FULFILLED state
+      resolve("Operation Completed Successfully");
+    }, timeout);
+
+});
+};
+
+/\*\*
+
+- A custom utility that polls a condition until it returns true.
+- Demonstrates explicit Promise creation and state management.
+  \*/
+  async function waitForCondition(
+  conditionName: string,
+  timeout: number = 5000
+  ): Promise<boolean> {
+  return new Promise((resolve, reject) => {
+  const start = Date.now();
+
+      const check = () => {
+        // Logic for Success (Fulfillment)
+        if (someExternalCondition()) {
+          console.log(`${conditionName} met!`);
+          resolve(true);
+          return;
+        }
+
+        // Logic for Failure (Rejection)
+        if (Date.now() - start > timeout) {
+          reject(new Error(`Timed out waiting for: ${conditionName}`));
+          return;
+        }
+
+        // Logic for remaining PENDING
+        setTimeout(check, 100);
+      };
+
+      check();
+
+  });
+  }
+
+promise.allSettled() : it will wait for all promises to settled , either reject or fulfilled.
+but it will not simply failed if any one of them is failed, it waits until the execution of
+all tests are done.
+Very useful for broswer closure scenarios..
+
+Kubernates:
+uses helm deployment::
+connect to the ENV: in the .kube file, we will have the connection details.
+check pod health (up , runnng, crashloop) --> kubectl -n feat1 get pods | egrep nitro
+check pod logs --> kubectl -n feat1 logs nitro-api-chart-0 -c application
+execute inisde a container(pod and execute a command) --> kubectl -n feat1 exec -it nitro-api-chart-0 -- sh
+scale up or scale down a pod --> kubectl -n prp1 scale deploy ipt-xg3-graph-ui --replicas=1
+kubectl -n prp1 scale deploy ipt-xg3-graph-ui --replicas=0
+rollout/restart a pod --> kubectl -n feat1 rollout restart deploy/nitro-ui-chart
+update config manager --> kubectl -n feat1 edit cm nitro-ui-chart-extra-config
+
+valut login
+vault login -method=ldap abhishek.sharma
+
+vault list <path>
+
+we followed a iterative approach for a release.
+risk based testing
+mini regression
+critical path
+route to live
+critical path
+carefull defining the
+how to analyze what to automate - most critical path use cases to be automated first
+along with frequent screens(most used screens) to be automated
+what if we miss to automate something , how we handle it ? -->
+we create a test only ticket and keep it in backlog and make sure to pull it in next sprint to
+work on it
+describe a time when you handled a complex project ?
+
+AWS: Secret Manager, Lambda, S3 , IAMRoles, EC2 (Jenkins machine - cleanup etc)
+Jenkins:
+Some of code was not properly parametrized and also was in early phase and not parallelse
+which caused propblem the way we run them in jenkins as it didn't clearly explain which
+tye of devices-configs etc we're using, project was not properly parametrized., all removed all the hard coded dependencies from local property files and added them as
+run time params, those were accepted as jenkins parameters and helped to properly create our
+jenkins jobs. and also parallelise.
+MOved all client secret keys secrets to AWS Secret MAnager
+also maintained some of physical boxes worked as jenkins agents for real device testing.(we linked
+mobile devices)
