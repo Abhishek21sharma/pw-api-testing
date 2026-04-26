@@ -401,7 +401,8 @@ what if we miss to automate something , how we handle it ? -->
 we create a test only ticket and keep it in backlog and make sure to pull it in next sprint to
 work on it
 describe a time when you handled a complex project ?
-
+(so many APIs are called , only backend , we did schema validations, mock testing and then actual
+api level tests )
 AWS: Secret Manager, Lambda, S3 , IAMRoles, EC2 (Jenkins machine - cleanup etc)
 Jenkins:
 Some of code was not properly parametrized and also was in early phase and not parallelse
@@ -412,3 +413,27 @@ jenkins jobs. and also parallelise.
 MOved all client secret keys secrets to AWS Secret MAnager
 also maintained some of physical boxes worked as jenkins agents for real device testing.(we linked
 mobile devices)
+
+what is a framework, it's principles and what does it gives you :
+At its core, a testing framework is an organized set of rules, protocols, and tools designed to standardize how you create, execute, and report on tests. For a professional with your background—building scalable frameworks for Web, Mobile, and API layers —it acts as the "operating system" for your quality strategy.
+
+A framework provides the infrastructure so you can focus on test logic rather than setup overhead. a framework provides:
+Consistency: Standardizes coding practices across teams
+Reusability: Reduces duplicate scripting by using Page Object Models (POM) or shared fixtures
+Scalability: Allows you to manage thousands of tests across different environments using Maven profiles or environment variables
+Maintenance:
+Reporting:
+
+Properties of a high quality framework:
+A. Modularity & Abstraction: The framework should separate the Test Scripts (the "What") from the Page Objects/Logic (the "How"). This is evident in your use of Page Object Models and Fixtures to isolate validation.
+
+B. Portability & IntegrationIt must be able to run in various environments (Local, Dev, Staging) and integrate seamlessly into CI/CD pipelines.
+
+C. Parameterization (Data-Driven)
+A strong framework separates test data from test code. Using Maven profiles or SQL database validations allows you to run the same test logic with different data sets.
+
+D. Error Handling & Observability
+The framework should handle exceptions gracefully (like the Playwright exceptions we discussed) and provide "Observability" through logs, screenshots, and traces.
+
+E. Speed & Efficiency
+Properties like Parallel Execution and Sharding are essential. You've leveraged these to optimize pipelines and accelerate releases.
