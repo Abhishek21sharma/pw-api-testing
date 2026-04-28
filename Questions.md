@@ -437,3 +437,61 @@ The framework should handle exceptions gracefully (like the Playwright exception
 
 E. Speed & Efficiency
 Properties like Parallel Execution and Sharding are essential. You've leveraged these to optimize pipelines and accelerate releases.
+
+Authentication -> verifies who you are . like doing login
+Authrorisation -> verifies what we can do . like after login what page you can see etc.
+
+some of API interview questions:
+401 vs 403 -->
+401 --> unauthorized . Authentication failed
+(wrong token, token expired, token not provided, wrong credentials (wrong client ID or secrets provided))
+403 --> Forbidden . Means that authrorization is done but does not have permission to do hit this request
+(valid token but insufficient roles, DELETE end point may need Admin user level access and not any user access)
+
+API -ve test cases:
+Verify API behaviour when user identity is not established --401
+(mising token, invalid token, incorrect client ID etc)
+Verify API denies acess despite valid authentication --403
+Verify API handles invalid request data properly -- 400 (Bad request)
+(field length exceeded, mandatory fields are missings, invalid data type, special characters , sql injections, extra unsupported fields)
+Verify clear and meaniful error msg
+Verify 404 (not found ) when transactions are missing or not found.
+
+Test scenario -> a high level description of a feature which needs to be tested
+(like login feature - test scenario: test the login functionality)
+Test Cases -> it is detailed , step by step instruction used to valid the specific behaviour
+(like login with valid credentials, valid with invalid credentials, password field should be mased, check box to accept the policies before login )
+
+Things to keep in mind before starting to test a user story:
+/ How do we start testing a user story -
+(From the Backlog grooming stage --> Defination of Ready --> During/After development)
+Grooming ->
+need to check : who is the user, what is the goal, why it is needed ??
+any dependencies, edge cases discussed.
+Ready -->
+make sure AC is good , UI mockup/API contract available, Story size understood, Test Data requirements are clear.
+During dev -->
+Tester can finalize test cases,
+prepare automation script skeloton,
+set up test data
+update traceblity (story -> Test cases)
+After dev -->
+validate test.
+
+Tester contribution:
+Ask any clarifications and make sure we know what we have to test and deliver
+identity any gaps and risk and highlight any missing AC
+identity the test type: UI or API or just regression , any -ve test and prepare for test data
+
+Before closing a User Story:
+All ACs are covered
+Functional and -ve tests are passed
+Regression risk assessed
+Automation updated
+No critical or open defect
+Test evidences attached
+
+Shift left::
+started testing early in a project lifecycle
+
+Tesers also started early engaging with a story rather than waiting for the story to come to testing phase
