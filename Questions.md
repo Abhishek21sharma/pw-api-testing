@@ -495,3 +495,38 @@ Shift left::
 started testing early in a project lifecycle
 
 Tesers also started early engaging with a story rather than waiting for the story to come to testing phase
+
+playwright.yaml file to trigger github actions:
+(.github/workflow/playwright.yaml)
+name: Playwright Tests
+on:
+push:
+branches: [ main, master ]
+pull_request:
+branches: [ main, master ]
+
+jobs:
+test:
+timeout-minutes: 60
+runs-on: ubuntu-latest
+steps: - uses: actions/checkout@v4
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+
+    - name: Run Playwright tests
+      run: npx playwright test
+
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
